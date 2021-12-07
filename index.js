@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs/promises');
 
+const readFileTalkers = require('./utils/readFileTalkers.js');
+
 const app = express();
 app.use(bodyParser.json());
 
@@ -17,13 +19,8 @@ app.get('/', (_request, response) => {
 
 // Requesito 1:
 app.get('/talker', async (_req, res) => {
-  try {
-    const talkers = await fs.readFile('./talker.json');
-    const parseTalkers = JSON.parse(talkers);
-    return res.status(200).json(parseTalkers);
-  } catch (err) {
-    return res.status(200).json([]);
-  }
+  const talkers = await readFileTalkers();
+  return res.status(200).json(talkers);
 });
 
 // FIM REQUESITOS.
