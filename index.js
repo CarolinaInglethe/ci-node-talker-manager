@@ -1,7 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+// minhas importaçoes:
 const readFileTalkers = require('./utils/readFileTalkers.js');
+const validateEmail = require('./middlewares/validateEmailMiddleware');
+const validatePassword = require('./middlewares/validatePasswordMiddleware');
+// ------------
 
 const app = express();
 app.use(bodyParser.json());
@@ -32,6 +36,15 @@ app.get('/talker/:id', async (req, res) => {
   if (!userId) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 
   return res.status(200).json(userId);
+});
+
+// Requesito 3:
+app.post('/login', validateEmail, validatePassword, (req, res) => {
+  const randomString = () => Math.random().toString(16).substr(2);
+  const generateToken = () => (randomString() + randomString()).substr(0, 16);
+  // string.substr(start, length)
+  // referencia : https://medium.com/@norbertofariasmedeiros/five-steps-como-gerar-um-random-token-em-javascript-1e1488a15d28
+  return res.status(200).json(generateToken());
 });
 
 // FIM REQUESITOS.
