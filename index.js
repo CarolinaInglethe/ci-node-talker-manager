@@ -9,7 +9,7 @@ const authMiddleware = require('./middlewares/authMiddleware.js');
 const validateNameNewTalker = require('./middlewares/validadeNameNewTalkerMiddleware');
 const validateAgeNewTalker = require('./middlewares/validateAgeNewTalkerWiddleware');
 const validateTalkNewTalker1 = require('./middlewares/validadeTalkNewTalkerWiddleware1');
-const validateTalkNewTalker2 = require('./middlewares/validateTalkNewTalkerMiddleware2');
+const validateValuesTalkNewTalker = require('./middlewares/validateValuesTalkNewTalkerMiddleware');
 // -----------------------
 
 const app = express();
@@ -58,7 +58,7 @@ app.post('/talker',
   validateNameNewTalker,
   validateAgeNewTalker,
   validateTalkNewTalker1,
-  validateTalkNewTalker2,
+  validateValuesTalkNewTalker,
    (req, res) => {
     const { name, age, talk } = req.body;
 
