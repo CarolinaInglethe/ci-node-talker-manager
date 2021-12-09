@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 
 // minhas importaçoes:
 const readFileTalkers = require('./utils/readFileTalkers.js');
+const writeFileTalkers = require('./utils/writeFileTalkers');
 const validateEmail = require('./middlewares/validateEmailMiddleware');
 const validatePassword = require('./middlewares/validatePasswordMiddleware');
 const authMiddleware = require('./middlewares/authMiddleware.js');
@@ -44,7 +45,7 @@ app.get('/talker/:id', async (req, res) => {
 });
 
 // Requesito 3:
-app.post('/login', validateEmail, validatePassword, (req, res) => {
+app.post('/login', validateEmail, validatePassword, (_req, res) => {
   const randomString = () => Math.random().toString(36).substr(2);
   const generateToken = () => (randomString() + randomString()).substr(0, 16);
   // string.substr(start, length)
@@ -61,10 +62,17 @@ app.post('/talker',
   validateValuesTalkNewTalker,
    (req, res) => {
     const { name, age, talk } = req.body;
+    // pega os talkers e pega o ultimo da lista:
+    const talkers = readFileTalkers();
+    const last = talkers[talkers.length - 1];
+    // apartir do id do ultimo cria id para o Novo talker que sera adicionado:
+    const infoNewTalker = { id: last.id + 1, name, age, talk };
 
-    res.status(201).json({
-      id: 1, name, age, talk,
-    });
+    // salva variavel com novo talker adicionado na lista e escreve no arquivo a nova lista
+    const newTalkers = talkers.push(infoNewTalker);
+    writeFileTalkers(newTalkers);
+
+    res.status(201).json(infoNewTalker);
   });
 
 // --------------------- FIM REQUESITOS.
