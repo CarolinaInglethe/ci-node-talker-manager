@@ -5,7 +5,12 @@ const bodyParser = require('body-parser');
 const readFileTalkers = require('./utils/readFileTalkers.js');
 const validateEmail = require('./middlewares/validateEmailMiddleware');
 const validatePassword = require('./middlewares/validatePasswordMiddleware');
-// ------------
+const authMiddleware = require('./middlewares/authMiddleware.js');
+const validateNameNewTalker = require('./middlewares/validadeNameNewTalkerMiddleware');
+const validateAgeNewTalker = require('./middlewares/validateAgeNewTalkerWiddleware');
+const validateTalkNewTalker1 = require('./middlewares/validadeTalkNewTalkerWiddleware1');
+const validateTalkNewTalker2 = require('./middlewares/validateTalkNewTalkerMiddleware2');
+// -----------------------
 
 const app = express();
 app.use(bodyParser.json());
@@ -18,7 +23,7 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
-// INICIO REQUESITOS :
+// -------------------- INICIO REQUESITOS :
 
 // Requesito 1:
 app.get('/talker', async (_req, res) => {
@@ -47,7 +52,22 @@ app.post('/login', validateEmail, validatePassword, (req, res) => {
   return res.status(200).json(generateToken());
 });
 
-// FIM REQUESITOS.
+// Requesito 4:
+app.post('/talker',
+  authMiddleware,
+  validateNameNewTalker,
+  validateAgeNewTalker,
+  validateTalkNewTalker1,
+  validateTalkNewTalker2,
+   (req, res) => {
+    const { name, age, talk } = req.body;
+
+    res.status(201).json({
+      id: 1, name, age, talk,
+    });
+  });
+
+// --------------------- FIM REQUESITOS.
 
 app.listen(PORT, () => {
   console.log('Online');
