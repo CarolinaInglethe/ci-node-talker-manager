@@ -1,4 +1,4 @@
-const validateAgeNewTalker = (req, res, next) => {
+const validateAge = (req, res, next) => {
     const { age } = req.body;
 
     if (age === undefined || age === '') {
@@ -11,4 +11,4 @@ const validateAgeNewTalker = (req, res, next) => {
     next();
 };
 
-module.exports = validateAgeNewTalker;
+module.exports = validateAge;

@@ -1,4 +1,4 @@
-const authMiddleware = (req, res, next) => {
+const validateToken = (req, res, next) => {
     const token = req.headers.authorization;
 
     if (token === undefined) {
@@ -12,4 +12,4 @@ const authMiddleware = (req, res, next) => {
     next();
 };
 
-module.exports = authMiddleware;
+module.exports = validateToken;

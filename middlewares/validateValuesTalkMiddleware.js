@@ -1,4 +1,4 @@
-const validateValueTalkNewTalker = (req, res, next) => {
+const validateValuesTalk = (req, res, next) => {
     const { talk } = req.body;
 
     if (talk.watchedAt !== Date()) {
@@ -16,4 +16,4 @@ const validateValueTalkNewTalker = (req, res, next) => {
     next();
 };
 
-module.exports = validateValueTalkNewTalker;
+module.exports = validateValuesTalk;

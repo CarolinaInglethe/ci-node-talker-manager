@@ -1,4 +1,4 @@
-const validadeNameNewTalker = (req, res, next) => {
+const validadeName = (req, res, next) => {
     const { name } = req.body;
 
     if (name === undefined || name === '') {
@@ -11,4 +11,4 @@ const validadeNameNewTalker = (req, res, next) => {
     next();
 };
 
-module.exports = validadeNameNewTalker;
+module.exports = validadeName;

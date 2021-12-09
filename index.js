@@ -6,11 +6,11 @@ const readFileTalkers = require('./utils/readFileTalkers.js');
 const writeFileTalkers = require('./utils/writeFileTalkers');
 const validateEmail = require('./middlewares/validateEmailMiddleware');
 const validatePassword = require('./middlewares/validatePasswordMiddleware');
-const authMiddleware = require('./middlewares/authMiddleware.js');
-const validateNameNewTalker = require('./middlewares/validadeNameNewTalkerMiddleware');
-const validateAgeNewTalker = require('./middlewares/validateAgeNewTalkerWiddleware');
-const validateTalkNewTalker1 = require('./middlewares/validadeTalkNewTalkerWiddleware1');
-const validateValuesTalkNewTalker = require('./middlewares/validateValuesTalkNewTalkerMiddleware');
+const validateToken = require('./middlewares/validateTokenMiddlewares.js');
+const validateName = require('./middlewares/validadeNameMiddleware');
+const validateAge = require('./middlewares/validateAgeWiddleware');
+const validatetalk = require('./middlewares/validadeTalkWiddleware1');
+const validateValuesTalk = require('./middlewares/validateValuesTalkMiddleware');
 // -----------------------
 
 const app = express();
@@ -55,11 +55,11 @@ app.post('/login', validateEmail, validatePassword, (_req, res) => {
 
 // Requesito 4:
 app.post('/talker',
-  authMiddleware,
-  validateNameNewTalker,
-  validateAgeNewTalker,
-  validateTalkNewTalker1,
-  validateValuesTalkNewTalker,
+  validateToken,
+  validateName,
+  validateAge,
+  validatetalk,
+  validateValuesTalk,
    (req, res) => {
     const { name, age, talk } = req.body;
     // pega os talkers e pega o ultimo da lista:

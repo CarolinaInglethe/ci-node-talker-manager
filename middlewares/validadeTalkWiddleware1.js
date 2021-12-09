@@ -1,4 +1,4 @@
-const validateTalkNewTalker = (req, res, next) => {
+const validateTalk = (req, res, next) => {
     const { talk } = req.body;
     
     if (!talk || talk.watchedAt === undefined || talk.rate === undefined) {
@@ -9,4 +9,4 @@ const validateTalkNewTalker = (req, res, next) => {
     next();
 };
 
-module.exports = validateTalkNewTalker;
+module.exports = validateTalk;
