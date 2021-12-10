@@ -39,19 +39,21 @@ app.get('/talker/:id', async (req, res) => {
   const talkers = await readFileTalkers();
 
   const userId = talkers.find((talker) => talker.id === Number(id));
-
   if (!userId) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 
   return res.status(200).json(userId);
 });
 
 // Requesito 3:
-app.post('/login', validateEmail, validatePassword, (_req, res) => {
-  const randomString = () => Math.random().toString(36).substr(2);
-  const generateToken = () => (randomString() + randomString()).substr(0, 16);
+app.post('/login',
+  validateEmail,
+  validatePassword, 
+  (_req, res) => {
+    const randomString = () => Math.random().toString(36).substr(2);
+    const generateToken = () => (randomString() + randomString()).substr(0, 16);
   // string.substr(start, length)
   // referencia : https://medium.com/@norbertofariasmedeiros/five-steps-como-gerar-um-random-token-em-javascript-1e1488a15d28
-  return res.status(200).json(generateToken());
+    return res.status(200).json(generateToken());
 });
 
 // Requesito 4:
