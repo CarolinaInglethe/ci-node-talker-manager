@@ -9,8 +9,9 @@ const validatePassword = require('./middlewares/validatePasswordMiddleware');
 const validateToken = require('./middlewares/validateTokenMiddlewares.js');
 const validateName = require('./middlewares/validadeNameMiddleware');
 const validateAge = require('./middlewares/validateAgeWiddleware');
-const validatetalk = require('./middlewares/validadeTalkWiddleware1');
+const validateTalk = require('./middlewares/validadeTalkWiddleware');
 const validateValuesTalk = require('./middlewares/validateValuesTalkMiddleware');
+
 // -----------------------
 
 const app = express();
@@ -58,7 +59,7 @@ app.post('/talker',
   validateToken,
   validateName,
   validateAge,
-  validatetalk,
+  validateTalk,
   validateValuesTalk,
    (req, res) => {
     const { name, age, talk } = req.body;
@@ -69,7 +70,7 @@ app.post('/talker',
     const infoNewTalker = { id: last.id + 1, name, age, talk };
 
     // salva variavel com novo talker adicionado na lista e escreve no arquivo a nova lista
-    const newTalkers = talkers.push(infoNewTalker);
+    const newTalkers = [...talkers, infoNewTalker];
     writeFileTalkers(newTalkers);
 
     res.status(201).json(infoNewTalker);
