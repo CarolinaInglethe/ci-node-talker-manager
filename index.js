@@ -109,7 +109,7 @@ app.delete('./talker/:id',
     talkers.splice(talkerIndex, 1);
     res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
   });
-
+  
 // --------------------- FIM REQUESITOS.
 
 app.listen(PORT, () => {
