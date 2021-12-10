@@ -66,7 +66,6 @@ app.post('/talker',
     const last = talkers[talkers.length - 1];
     // apartir do id do ultimo cria id para o Novo talker que sera adicionado:
     const infoNewTalker = { id: last.id + 1, name, age, talk };
-
     // salva variavel com novo talker adicionado na lista e escreve no arquivo a nova lista
     const newTalkers = [...talkers, infoNewTalker];
     writeFileTalkers(newTalkers);
