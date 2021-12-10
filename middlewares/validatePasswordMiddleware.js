@@ -1,7 +1,7 @@
 const validatePassword = (req, res, next) => {
     const { password } = req.body;
 
-    if (!password) {
+    if (!password || password === '') {
         return res.status(400).json({ message: 'O campo "password" é obrigatório' });
     }
     if (password.length < 6) {
