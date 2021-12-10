@@ -96,6 +96,20 @@ validateValuesTalk,
   res.status(200).json(newTalker);
 });
 
+// Requesito 6:
+app.delete('./talker/:id',
+  validateToken,
+  (req, res) => {
+    const { id } = req.params;
+    const talkers = readFileTalkers();
+    // encontra indice baseado no id :
+    const talkerIndex = talkers.findIndex((t) => t.id === id);
+    // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
+
+    talkers.splice(talkerIndex, 1);
+    res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
+  });
+
 // --------------------- FIM REQUESITOS.
 
 app.listen(PORT, () => {
