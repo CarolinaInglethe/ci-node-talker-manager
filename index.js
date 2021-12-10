@@ -10,8 +10,8 @@ const validatePassword = require('./middlewares/validatePasswordMiddleware');
 const validateToken = require('./middlewares/validateTokenMiddlewares.js');
 const validateName = require('./middlewares/validadeNameMiddleware');
 const validateAge = require('./middlewares/validateAgeWiddleware');
-const validateTalk = require('./middlewares/validadeTalkWiddleware');
-const validateValuesTalk = require('./middlewares/validateValuesTalkMiddleware');
+const validateTalkWatchedAt = require('./middlewares/validateTalkWatchedAt');
+const validateTalkRate = require('./middlewares/validateTalkRateMiddleware');
 
 // -----------------------
 
@@ -57,8 +57,8 @@ app.post('/talker',
   validateToken,
   validateName,
   validateAge,
-  validateTalk,
-  validateValuesTalk,
+  validateTalkWatchedAt,
+  validateTalkRate,
    (req, res) => {
     const { name, age, talk } = req.body;
     // pega os talkers e pega o ultimo da lista:
@@ -79,8 +79,8 @@ app.put('./talker/:id',
 validateToken,
 validateName,
 validateAge,
-validateTalk,
-validateValuesTalk,
+validateTalkWatchedAt,
+validateTalkRate,
 (req, res) => {
   const { id } = req.params;
   const { name, age, talk } = req.body;
