@@ -1,7 +1,7 @@
 const validadeName = (req, res, next) => {
     const { name } = req.body;
 
-    if (name === undefined || name === '') {
+    if (!name || name === '') {
         return res.status(400).json({ message: 'O campo "name" é obrigatório' });
     }
     if (name.length < 3) { 
