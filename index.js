@@ -113,7 +113,7 @@ app.delete('/talker/:id',
     if (talkerIndex === -1) return res.status(404).json({ message: 'not found' });
 
     talkers.splice(talkerIndex, 1);
-    return res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
+    res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
   });
   
 // --------------------- FIM REQUESITOS.
