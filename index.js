@@ -74,7 +74,7 @@ app.post('/talker',
   });
 
 // Requesito 5:
-app.put('./talker/:id',
+app.put('/talker/:id',
 validateToken,
 validateName,
 validateAge,
@@ -90,11 +90,11 @@ validateWatchedAtAndRate,
   // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
 
   writeFileTalkers(updateTalkerId);
-  res.status(200).json(newTalker);
+  return res.status(200).json(newTalker);
 });
 
 // Requesito 6:
-app.delete('./talker/:id',
+app.delete('/talker/:id',
   validateToken,
   (req, res) => {
     const { id } = req.params;
