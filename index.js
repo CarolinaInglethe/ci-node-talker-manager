@@ -104,13 +104,12 @@ async (req, res) => {
 // Requesito 6:
 app.delete('/talker/:id',
   validateToken,
-  async (req, res) => {
+  (req, res) => {
     const { id } = req.params;
-    const talkers = await readFileTalkers();
+    const talkers = readFileTalkers();
     // encontra indice baseado no id :
-    const talkerIndex = talkers.findIndex((t) => t.id === Number(id));
+    const talkerIndex = talkers.findIndex((t) => t.id === id);
     // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
-    if (talkerIndex === -1) return res.status(404).json({ message: 'not found' });
 
     talkers.splice(talkerIndex, 1);
     res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
