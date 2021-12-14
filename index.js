@@ -70,7 +70,7 @@ app.post('/talker',
     const newTalkers = [...talkers, infoNewTalker];
     writeFileTalkers(newTalkers);
 
-    res.status(201).json(infoNewTalker);
+    return res.status(201).json(infoNewTalker);
   });
 
 // Requesito 5:
