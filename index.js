@@ -80,17 +80,25 @@ validateName,
 validateAge,
 validateTalk,
 validateWatchedAtAndRate,
-(req, res) => {
+async (req, res) => {
   const { id } = req.params;
   const { name, age, talk } = req.body;
 
-  const newTalker = { id, name, age, talk };
-  const talkers = readFileTalkers();
-  const updateTalkerId = talkers.map((talker) => (talker.id === id ? newTalker : talker)); // cria novo array onde muda o talker cujo id seja o determinado.
-  // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
+  const talkers = await readFileTalkers();
+  const talkIndex = talkers.findIndex((t) => t.id === Number(id));
+  if (talkIndex === -1) return res.status(404).json({ message: 'not found' });
 
-  writeFileTalkers(updateTalkerId);
-  return res.status(200).json(newTalker);
+  talkers[talkIndex] = { ...talkers[talkIndex], name, age, talk };
+
+  writeFileTalkers(talkers);
+  return res.status(200).json(talkers[talkIndex]);
+  // const newTalker = { id, name, age, talk };
+  // const talkers = readFileTalkers();
+  // const updateTalkerId = talkers.map((talker) => (talker.id === id ? newTalker : talker)); // cria novo array onde muda o talker cujo id seja o determinado.
+  // // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
+
+  // writeFileTalkers(updateTalkerId);
+  // return res.status(200).json(newTalker);
 });
 
 // Requesito 6:
