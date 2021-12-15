@@ -86,7 +86,7 @@ validateWatchedAtAndRate,
 
   const newTalker = { id, name, age, talk };
   const talkers = readFileTalkers();
-  const updateTalkerId = talkers.map((talker) => (talker.id === id ? newTalker : talker)); // cria novo array onde muda o talker cujo id seja o determinado.
+  const updateTalkerId = talkers.map((talker) => (talker.id === Number(id) ? newTalker : talker)); // cria novo array onde muda o talker cujo id seja o determinado.
   // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
 
   writeFileTalkers(updateTalkerId);
