@@ -107,10 +107,11 @@ app.delete('/talker/:id',
     const { id } = req.params;
     const talkers = readFileTalkers();
     // encontra indice baseado no id :
-    const talkerIndex = talkers.findIndex((t) => t.id === id);
+    const talkerIndex = talkers.findIndex((t) => t.id === Number(id));
     // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
 
     talkers.splice(talkerIndex, 1);
+    writeFileTalkers(talkers);
     res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
   });
   
