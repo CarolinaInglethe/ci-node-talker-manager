@@ -90,7 +90,7 @@ validateWatchedAtAndRate,
   talkers[talkerIndex] = { ...talkers[talkerIndex], name, age, talk };
 
   writeFileTalkers(talkers);
-  return res.status(200).json(talkers);
+  return res.status(200).json(talkers[talkerIndex]);
 
   // const newTalker = { id, name, age, talk };
   // const updateTalkerId = talkers.map((talker) => (talker.id === Number(id) ? newTalker : talker)); // cria novo array onde muda o talker cujo id seja o determinado.
