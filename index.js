@@ -107,7 +107,7 @@ app.delete('/talker/:id',
     res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
   });
   
-// --------------------- FIM REQUESITOS.
+// -------------------- FIM REQUESITOS.
 
 app.listen(PORT, () => {
   console.log('Online');
