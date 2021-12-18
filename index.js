@@ -110,8 +110,6 @@ app.delete('/talker/:id',
 
 // -------------------- FIM REQUESITOS.
 
-app.use((err, _req, res, _next) => res.status(500).json({ error: `Erro: ${err.message}` }));
-
 app.listen(PORT, () => {
   console.log('Online');
 });
