@@ -90,7 +90,7 @@ validateWatchedAtAndRate,
   // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
 
   writeFileTalkers(newTalkers);
-  res.status(200).json(newTalker);
+  return res.status(200).json(newTalker);
 });
 
 // Requesito 6:
