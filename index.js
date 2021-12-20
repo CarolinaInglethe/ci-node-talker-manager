@@ -80,10 +80,10 @@ validateName,
 validateAge,
 validateTalk,
 validateWatchedAtAndRate,
-async (req, res) => {
+ (req, res) => {
   const { id } = req.params;
   const { name, age, talk } = req.body;
-  const talkers = await readFileTalkers();
+  const talkers = readFileTalkers();
 
   const newTalker = { id: Number(id), name, age, talk };
   const newTalkers = talkers.map((talker) => (
@@ -92,7 +92,7 @@ async (req, res) => {
   // cria novo array onde muda o talker cujo id seja o determinado.
   // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
 
-  await writeFileTalkers(newTalkers);
+   writeFileTalkers(newTalkers);
   res.status(200).json(newTalker);
 });
 
