@@ -81,16 +81,16 @@ validateAge,
 validateTalk,
 validateWatchedAtAndRate,
 (req, res) => {
-  const { name, age, talk } = req.body;
   const { id } = req.params;
+  const { name, age, talk } = req.body;
 
+  const newTalker = { id, name, age, talk };
   const talkers = readFileTalkers();
-  const talkerIndex = talkers.findIndex((t) => t.id === Number(id));
+  const newTalkers = talkers.map((talker) => (talker.id === Number(id) ? newTalker : talker)); // cria novo array onde muda o talker cujo id seja o determinado.
+  // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
 
-  talkers[talkerIndex] = { ...talkers[talkerIndex], name, age, talk };
-
-  writeFileTalkers(talkers);
-  res.status(200).json(talkers[talkerIndex]);
+  writeFileTalkers(newTalkers);
+  res.status(200).json(newTalker);
 });
 
 // Requesito 6:
