@@ -34,15 +34,6 @@ app.get('/talker', async (_req, res) => {
   return res.status(200).json(talkers);
 });
 
-// Requesito 2:
-app.get('/talker/:id', async (req, res) => {
-  const { id } = req.params;
-  const talkers = await readFileTalkers();
-  const userId = talkers.find((talker) => talker.id === Number(id));
-  if (!userId) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
-  return res.status(200).json(userId);
-});
-
  // Requesito 7:
  app.get('/talker/search',
  validateToken,
@@ -57,12 +48,17 @@ app.get('/talker/:id', async (req, res) => {
    const filteredTalkers = talkers.filter((t) => t.name.includes(q));
    // https://blog.betrybe.com/javascript/javascript-filter/
 
-   if (filteredTalkers.length === 0) {
-     return res.status(200).json([]);
-   }
-
-   res.status(200).json(filteredTalkers);
+   return res.status(200).json(filteredTalkers);
  });
+
+// Requesito 2:
+app.get('/talker/:id', async (req, res) => {
+  const { id } = req.params;
+  const talkers = await readFileTalkers();
+  const userId = talkers.find((talker) => talker.id === Number(id));
+  if (!userId) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  return res.status(200).json(userId);
+});
 
 // Requesito 3:
 app.post('/login',
