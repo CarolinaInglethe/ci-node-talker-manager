@@ -113,6 +113,27 @@ app.delete('/talker/:id',
     res.status(200).json({ message: 'Pessoa palestrante deletada com sucesso' });
   });
 
+  // Requesito 7:
+  app.get('/talker/search',
+    validateToken,
+    (req, res) => {
+      const { q } = req.query;
+      const talkers = readFileTalkers();
+
+      if (!q || q.length === 0) {
+        return res.status(200).json(talkers);
+      }
+      
+      const filteredTalkers = talkers.filter((t) => t.name.includes(q));
+      // https://blog.betrybe.com/javascript/javascript-filter/
+
+      if (filteredTalkers.length === 0) {
+        return res.status(200).json([]);
+      }
+
+      res.status(200).json(filteredTalkers);
+    });
+
 // -------------------- FIM REQUESITOS.
 
 app.listen(PORT, () => {
