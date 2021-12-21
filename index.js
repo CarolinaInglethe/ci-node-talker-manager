@@ -98,21 +98,24 @@ validateAge,
 validateTalk,
 validateWatchedAtAndRate,
  (req, res) => {
-  const { id } = req.params;
-  const { name, age, talk } = req.body;
-  const talkers = readFileTalkers();
-
-  if (Number(id) <= 0) return res.status(401).json({ message: 'Palestrante não encontrado' });
-
-  const newTalker = { id: Number(id), name, age, talk };
-  const newTalkers = talkers.map((talker) => (
-    talker.id === newTalker.id ? newTalker : talker
-  )); 
-  // cria novo array onde muda o talker cujo id seja o determinado.
-  // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
-
-   writeFileTalkers(newTalkers);
-  return res.status(200).json(newTalker);
+   try {
+    const { id } = req.params;
+    const { name, age, talk } = req.body;
+    const talkers = readFileTalkers();
+  
+    const newTalker = { id: Number(id), name, age, talk };
+    const newTalkers = talkers.map((talker) => (
+      talker.id === newTalker.id ? newTalker : talker
+    )); 
+    // cria novo array onde muda o talker cujo id seja o determinado.
+    // https://pt.stackoverflow.com/questions/162617/alterar-valor-do-objeto
+  
+     writeFileTalkers(newTalkers);
+     
+    return res.status(200).json(newTalker);
+   } catch (error) {
+     return res.status(400).json({ message: 'Not found' });
+   }
 });
 
 // Requesito 6:
